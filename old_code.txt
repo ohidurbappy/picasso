@@ -1,0 +1,50 @@
+var
+  SelectedFileName:String;
+  Picture:TPicture;
+  OriginalWidth:Integer;
+  OriginalHeight:Integer;
+  FormHeight:Integer;
+  FormWidth:Integer;
+  Bitmap:TBitmap;
+
+  begin
+     OpenDialog1.Title:='Open an Image..';
+  if OpenDialog1.Execute then
+  begin
+       SelectedFileName:=OpenDialog1.FileName;
+
+
+       Picture:=TPicture.Create;
+       Picture.LoadFromFile(SelectedFileName);
+
+       // get the original size of the selected file
+       OriginalWidth:=Picture.Bitmap.Width;
+       OriginalHeight:=Picture.Bitmap.Height;
+
+       // get the form height and width
+       FormHeight:=MainForm.ClientHeight;
+       FormWidth:=MainForm.ClientWidth;
+
+
+
+
+       // ShowMessage('Width:'+IntToStr(OriginalWidth)+' Height:'+IntToStr(OriginalHeight)+LineEnding+' Form Width:'+IntToStr(FormWidth)+'Form Height:'+IntToStr(FormHeight));
+           FFileName := SelectedFileName;
+         try
+         //T := GetTimeMicroseconds;
+         FImage.LoadMultiFromFile(SelectedFileName);
+         //MeasureTime(Format('File %s opened in:', [ExtractFileName(FileName)]), T);
+         except
+               MessageDlg(GetExceptObject.Message, mtError, [mbOK], 0);
+               FImage.CreateFromParams(32, 32, ifA8R8G8B8, 1);
+         end;
+
+
+
+        FImage.LoadMultiFromFile(SelectedFileName);
+        Image.Picture.Graphic:=Picture.Graphic;
+        Picture.Free;
+        LabelFileName.Caption:=SelectedFileName;
+        AutoFit(Sender);
+
+  end;                
