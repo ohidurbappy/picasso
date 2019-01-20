@@ -1,2 +1,2 @@
 # picasso
-Minimalistic photo viewer designed for sped
+Minimalistic photo viewer designed for speed
